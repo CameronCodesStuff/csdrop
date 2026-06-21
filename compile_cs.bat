@@ -4,28 +4,19 @@ title CSDROP
 
 if "%~1"=="" (
     echo.
-    echo  ██████╗███████╗██████╗ ██████╗  ██████╗ ██████╗
-    echo ██╔════╝██╔════╝██╔══██╗██╔══██╗██╔═══██╗██╔══██╗
-    echo ██║     ███████╗██║  ██║██████╔╝██║   ██║██████╔╝
-    echo ██║     ╚════██║██║  ██║██╔══██╗██║   ██║██╔═══╝
-    echo ╚██████╗███████║██████╔╝██║  ██║╚██████╔╝██║
-    echo  ╚═════╝╚══════╝╚═════╝ ╚═╝  ╚═╝ ╚═════╝ ╚═╝
-    echo.
-    echo  Drag one or more .cs files onto this script to compile.
+    echo ������������������������������������������������ͻ
+    echo �  CSDROP // C# AUTO-COMPILER                  �
+    echo �  Drag .cs files onto this script to compile   �
+    echo ������������������������������������������������ͼ
     echo.
     pause
     exit /b 0
 )
 
 echo.
-echo  ██████╗███████╗██████╗ ██████╗  ██████╗ ██████╗
-echo ██╔════╝██╔════╝██╔══██╗██╔══██╗██╔═══██╗██╔══██╗
-echo ██║     ███████╗██║  ██║██████╔╝██║   ██║██████╔╝
-echo ██║     ╚════██║██║  ██║██╔══██╗██║   ██║██╔═══╝
-echo ╚██████╗███████║██████╔╝██║  ██║╚██████╔╝██║
-echo  ╚═════╝╚══════╝╚═════╝ ╚═╝  ╚═╝ ╚═════╝ ╚═╝
-echo.
-echo ════════════════════════════════════════════════
+echo ������������������������������������������������ͻ
+echo �  CSDROP // C# AUTO-COMPILER                  �
+echo ������������������������������������������������ͼ
 echo.
 
 set "COMPILER="
@@ -35,7 +26,7 @@ where csc >nul 2>&1
 if %errorlevel%==0 (
     set "COMPILER=csc"
     set "MODE=roslyn"
-    echo  [COMPILER]  csc.exe ^(Roslyn^)
+    echo  [COMPILER]  csc.exe (Roslyn)
     goto :build
 )
 
@@ -43,13 +34,13 @@ for %%V in (v4.0.30319 v3.5 v2.0.50727) do (
     if exist "%WINDIR%\Microsoft.NET\Framework64\%%V\csc.exe" (
         set "COMPILER=%WINDIR%\Microsoft.NET\Framework64\%%V\csc.exe"
         set "MODE=framework"
-        echo  [COMPILER]  .NET Framework csc.exe ^(%%V^)
+        echo  [COMPILER]  .NET Framework csc.exe (%%V)
         goto :build
     )
     if exist "%WINDIR%\Microsoft.NET\Framework\%%V\csc.exe" (
         set "COMPILER=%WINDIR%\Microsoft.NET\Framework\%%V\csc.exe"
         set "MODE=framework"
-        echo  [COMPILER]  .NET Framework csc.exe ^(%%V^)
+        echo  [COMPILER]  .NET Framework csc.exe (%%V)
         goto :build
     )
 )
@@ -91,7 +82,7 @@ for %%F in (%*) do (
 )
 
 if defined SKIPPED (
-    echo  [SKIP]     !SKIPPED!
+    echo  [SKIP]    !SKIPPED!
     echo.
 )
 
@@ -113,19 +104,15 @@ echo.
 if "!MODE!"=="dotnet" (
     set "TMPDIR=!OUTDIR!_cstmp_%RANDOM%"
     mkdir "!TMPDIR!" >nul 2>&1
-
     dotnet new console -n _build --output "!TMPDIR!" --force >nul 2>&1
     del "!TMPDIR!\Program.cs" >nul 2>&1
-
     for %%F in (%*) do (
         if /i "%%~xF"==".cs" (
             copy /y "%%F" "!TMPDIR!\" >nul 2>&1
         )
     )
-
     dotnet build "!TMPDIR!" -o "!TMPDIR!\out" --nologo -c Release 2>&1
     set "RESULT=!errorlevel!"
-
     if !RESULT!==0 (
         copy /y "!TMPDIR!\out\_build.exe" "!OUTPUT!" >nul 2>&1
         if errorlevel 1 (
@@ -134,9 +121,7 @@ if "!MODE!"=="dotnet" (
             )
         )
     )
-
     rmdir /s /q "!TMPDIR!" >nul 2>&1
-
     if !RESULT! neq 0 (
         echo.
         echo  [FAIL]  Compilation failed. See errors above.
@@ -156,18 +141,19 @@ if "!MODE!"=="dotnet" (
 )
 
 echo.
-echo ════════════════════════════════════════════════
-echo.
-echo  [SUCCESS]  !OUTPUT!
+echo ������������������������������������������������ͻ
+echo �  SUCCESS                                        �
+echo �  !OUTPUT!                                        
+echo ������������������������������������������������ͼ
 echo.
 set /p "DORUN= Run now? (Y/N): "
 if /i "!DORUN!"=="Y" (
     echo.
-    echo ════════════════════════════════════════════════
+    echo  ������������������������������������������������
     echo.
     "!OUTPUT!"
     echo.
-    echo ════════════════════════════════════════════════
+    echo  ������������������������������������������������
     echo.
 )
 
