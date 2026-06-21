@@ -72,7 +72,7 @@ set "FILECOUNT=0"
 
 for %%F in (%*) do (
     if /i "%%~xF"==".cs" (
-        set "FILES=!FILES! "%%~F""
+        set "FILES=!FILES! %%F"
         if "!OUTNAME!"=="" (
             set "OUTNAME=%%~nF"
             set "OUTDIR=%%~dpF"
