@@ -165,7 +165,11 @@ if "!MODE!"=="dotnet" (
         exit /b 1
     )
 ) else (
-    "!COMPILER!" /out:"!OUTPUT!" /optimize+ /nologo !FILES!
+    if "!MODE!"=="roslyn" (
+        csc /out:"!OUTPUT!" /optimize+ /nologo !FILES!
+    ) else (
+        "!COMPILER!" /out:"!OUTPUT!" /optimize+ /nologo !FILES!
+    )
 
     if errorlevel 1 (
         echo.
