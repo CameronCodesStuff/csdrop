@@ -4,19 +4,15 @@ title CSDROP
 
 if "%~1"=="" (
     echo.
-    echo ������������������������������������������������ͻ
-    echo �  CSDROP // C# AUTO-COMPILER                  �
-    echo �  Drag .cs files onto this script to compile   �
-    echo ������������������������������������������������ͼ
+    echo CSDROP // C# AUTO-COMPILER                  
+    echo Drag .cs files onto this script to compile   
     echo.
     pause
     exit /b 0
 )
 
 echo.
-echo ������������������������������������������������ͻ
-echo �  CSDROP // C# AUTO-COMPILER                  �
-echo ������������������������������������������������ͼ
+echo   CSDROP // C# AUTO-COMPILER                  
 echo.
 
 set "COMPILER="
@@ -141,19 +137,15 @@ if "!MODE!"=="dotnet" (
 )
 
 echo.
-echo ������������������������������������������������ͻ
-echo �  SUCCESS                                        �
-echo �  !OUTPUT!                                        
-echo ������������������������������������������������ͼ
+echo   SUCCESS                                        
+echo   !OUTPUT!                                        
 echo.
 set /p "DORUN= Run now? (Y/N): "
 if /i "!DORUN!"=="Y" (
     echo.
-    echo  ������������������������������������������������
     echo.
     "!OUTPUT!"
     echo.
-    echo  ������������������������������������������������
     echo.
 )
 
