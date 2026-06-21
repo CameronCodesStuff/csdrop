@@ -8,7 +8,7 @@ if "%~1"=="" (
     echo  -------------------------
     echo  Drag one or more .cs files onto this script to compile.
     echo.
-    echo CameronCodesStuff
+    echo  CameronCodesStuff
     echo.
     pause
     exit /b 0
